@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# paru -S nvidia nvidia-utils
+paru -S nvidia nvidia-utils
 
 # Path to the mkinitcpio.conf file
-path="./file-test/mkinitcpio.conf"
+path="/etc/mkinitcpio.conf"
 
 # Array of new modules to add
 new_modules=('nvidia' 'nvidia_uvm' 'nvidia_modeset' 'nvidia_drm')
@@ -34,7 +34,7 @@ if [ -f "$path" ]; then
     sudo sed -i "s/^MODULES=(\(.*\))/MODULES=(${modules[*]})/" "$path"
 
     # Execute mkinitcpio command to generate the new initramfs
-    # sudo mkinitcpio -p linux
+    sudo mkinitcpio -p linux
 
     echo "Modules have been added successfully to $path and new initramfs have been generated."
 else
