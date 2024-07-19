@@ -40,3 +40,7 @@ if [ -f "$path" ]; then
 else
     echo "$path does not exist."
 fi
+
+# Creating a .conf file to add Nvidia-DRM options int  modprobe.d directory.
+echo 'Adding the following DRM Settings : nvidia_drm modeset=1 fbdev=1'
+sudo echo 'options nvidia_drm modeset=1 fbdev=1' > /etc/modprobe.d/nvidia_drm.conf
