@@ -33,9 +33,6 @@ if [ -f "$path" ]; then
     # Add the new modules to the file
     sudo sed -i "s/^MODULES=(\(.*\))/MODULES=(${modules[*]})/" "$path"
 
-    # Execute mkinitcpio command to generate the new initramfs
-    sudo mkinitcpio -p linux
-
     echo "Modules have been added successfully to $path and new initramfs have been generated."
 else
     echo "$path does not exist."
@@ -44,3 +41,6 @@ fi
 # Creating a .conf file to add Nvidia-DRM options int  modprobe.d directory.
 echo 'Adding the following DRM Settings : nvidia_drm modeset=1 fbdev=1'
 echo 'options nvidia_drm modeset=1 fbdev=1' | sudo tee /etc/modprobe.d/nvidia_drm.conf > /dev/null
+
+# Execute mkinitcpio command to generate the new initramfs
+sudo mkinitcpio -p linux
